@@ -51,7 +51,7 @@ export function ApiTestPage() {
     setScenesResponse(null);
 
     try {
-      const response = await fetch("/api/scenes", {
+      const response = await fetch("http://111.202.131.61:5432/api/scenes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -84,13 +84,16 @@ export function ApiTestPage() {
     setMotivesResponse(null);
 
     try {
-      const response = await fetch("/api/motives/extract", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(motivesData),
-      });
+      const response = await fetch(
+        "http://111.202.131.61:5432/api/motives/extract",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(motivesData),
+        }
+      );
 
       const data = await response.json();
 
@@ -117,7 +120,7 @@ export function ApiTestPage() {
     setMovementResponse(null);
 
     try {
-      const response = await fetch("/api/movement", {
+      const response = await fetch("http://111.202.131.61:5432/api/movement", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
