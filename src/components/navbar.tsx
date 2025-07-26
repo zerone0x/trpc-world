@@ -168,24 +168,6 @@ export function Navbar() {
               >
                 FAQ
               </button>
-              <button
-                onClick={() => {
-                  window.location.href = "/api-test";
-                  setIsMobileMenuOpen(false);
-                }}
-                className="text-gray-300 hover:text-white transition-colors px-4 py-2 text-left"
-              >
-                API Test
-              </button>
-              <button
-                onClick={() => {
-                  window.location.href = "/graph";
-                  setIsMobileMenuOpen(false);
-                }}
-                className="text-gray-300 hover:text-white transition-colors px-4 py-2 text-left"
-              >
-                Graph
-              </button>
 
               {isSignedIn ? (
                 <div className="flex items-center justify-center px-4 py-2">
