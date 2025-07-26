@@ -51,7 +51,7 @@ export function ApiTestPage() {
     setScenesResponse(null);
 
     try {
-      const response = await fetch("http://111.202.131.61:5432/api/scenes", {
+      const response = await fetch("https://msadream.cn/rpg/api/scenes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export function ApiTestPage() {
 
     try {
       const response = await fetch(
-        "http://111.202.131.61:5432/api/motives/extract",
+        "https://msadream.cn/rpg/api/motives/extract",
         {
           method: "POST",
           headers: {
@@ -120,7 +120,7 @@ export function ApiTestPage() {
     setMovementResponse(null);
 
     try {
-      const response = await fetch("http://111.202.131.61:5432/api/movement", {
+      const response = await fetch("https://msadream.cn/rpg/api/movement", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

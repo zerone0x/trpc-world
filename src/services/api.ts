@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://111.202.131.61:5432/api",
+  baseURL: "https://msadream.cn/rpg/api",
   timeout: 100000,
 });
 
