@@ -13,6 +13,8 @@ interface Message {
   timestamp: Date;
 }
 
+const CHAT_HISTORY_KEY = "chatHistory";
+
 export function GamePage() {
   const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([]);
@@ -54,7 +56,21 @@ export function GamePage() {
   useEffect(() => {
     inputRef.current?.focus();
 
-    // Initialize with welcome message only if no messages exist
+    const stored = localStorage.getItem(CHAT_HISTORY_KEY);
+    if (stored) {
+      try {
+        const parsed: Message[] = JSON.parse(stored).map((m: any) => ({
+          ...m,
+          timestamp: new Date(m.timestamp),
+        }));
+        if (parsed.length > 0) {
+          setMessages(parsed);
+          setIsInitialized(true);
+          return;
+        }
+      } catch {}
+    }
+
     if (!isInitialized && messages.length === 0) {
       const welcomeMessage: Message = {
         id: "welcome-1",
@@ -67,6 +83,12 @@ export function GamePage() {
       setIsInitialized(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (isInitialized) {
+      localStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(messages));
+    }
+  }, [messages, isInitialized]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -132,7 +154,7 @@ export function GamePage() {
       const narrativeContent =
         actionRes.data?.message ||
         actionRes.data?.outcome ||
-        actionRes.data?.content ||
+        actionRes.data?.trace?.content ||
         "";
 
       const narrativeMessage: Message = {

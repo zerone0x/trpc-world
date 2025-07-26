@@ -106,18 +106,6 @@ export function Navbar() {
             >
               FAQ
             </button>
-            <button
-              onClick={() => (window.location.href = "/api-test")}
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              API Test
-            </button>
-            <button
-              onClick={() => (window.location.href = "/graph")}
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              Graph
-            </button>
 
             {isSignedIn ? (
               <div className="flex items-center space-x-4">
