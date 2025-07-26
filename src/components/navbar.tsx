@@ -23,8 +23,6 @@ export function Navbar() {
     setAccountIdState(id);
     if (id) {
       localStorage.setItem("accountId", id);
-    } else {
-      localStorage.removeItem("accountId");
     }
   };
   // tracks backend account registration for current signed-in user via accountId from context

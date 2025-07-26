@@ -19,8 +19,6 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     setAccountIdState(id);
     if (id) {
       localStorage.setItem("accountId", id);
-    } else {
-      localStorage.removeItem("accountId");
     }
   };
 
