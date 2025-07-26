@@ -15,6 +15,23 @@ interface Message {
 
 const CHAT_HISTORY_KEY = "chatHistory";
 
+const TypewriterText: React.FC<{ text: string; speed?: number }> = ({
+  text,
+  speed = 20,
+}) => {
+  const [displayed, setDisplayed] = React.useState("");
+  React.useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      i++;
+      setDisplayed(text.slice(0, i));
+      if (i >= text.length) clearInterval(interval);
+    }, speed);
+    return () => clearInterval(interval);
+  }, [text, speed]);
+  return <>{displayed}</>;
+};
+
 export function GamePage() {
   const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([]);
@@ -24,26 +41,6 @@ export function GamePage() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  // Typewriter component for narrative messages
-  const TypewriterText: React.FC<{ text: string; speed?: number }> = ({
-    text,
-    speed = 20,
-  }) => {
-    const [displayed, setDisplayed] = useState("");
-
-    useEffect(() => {
-      let i = 0;
-      const interval = setInterval(() => {
-        i++;
-        setDisplayed(text.slice(0, i));
-        if (i >= text.length) clearInterval(interval);
-      }, speed);
-      return () => clearInterval(interval);
-    }, [text]);
-
-    return <>{displayed}</>;
-  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });

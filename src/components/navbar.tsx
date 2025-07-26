@@ -8,7 +8,6 @@ import {
 } from "@clerk/clerk-react";
 import { Button } from "./ui/button";
 import { Menu, X, Sparkles } from "lucide-react";
-import { useAccount } from "../context/account";
 import apiClient from "../services/api";
 
 export function Navbar() {
@@ -16,7 +15,18 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isSignedIn, user } = useUser();
   const { getToken } = useAuth();
-  const { accountId, setAccountId } = useAccount();
+  const [accountId, setAccountIdState] = useState<string | null>(() => {
+    return localStorage.getItem("accountId");
+  });
+
+  const setAccountId = (id: string | null) => {
+    setAccountIdState(id);
+    if (id) {
+      localStorage.setItem("accountId", id);
+    } else {
+      localStorage.removeItem("accountId");
+    }
+  };
   // tracks backend account registration for current signed-in user via accountId from context
 
   useEffect(() => {
